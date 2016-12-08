@@ -1,8 +1,7 @@
 App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
-  connected: function(){
-   	console.log("Ready!!!")
-    //Called when the subscription is ready for use on the server
-  },
+	connected: function(){
+		//Called when the subscription is ready for use on the server
+	},
 
 	disconnected: function(){
 		//Called when the subscription has been terminated by the server
@@ -16,7 +15,9 @@ App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
 			var $chatroom_link = $("a[data-behavior='chatroom-link'][data-chatroom-id='" + data.chatroom_id + "']");
 			$chatroom_link.css("font-weight", "bold").css('font-style', "italic");
 		}
-		
-		//Called when there's incoming data on the websocket for this channel
+	},
+
+	send_message: function(chatroom_id, message){
+		this.perform("send_message", { chatroom_id: chatroom_id, body: message });
 	}
 });

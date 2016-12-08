@@ -10,4 +10,12 @@ class ChatroomsChannel < ApplicationCable::Channel
     	stop_all_streams
   	end
 
+  	def send_message(data)  		
+  		Rails.logger.info "[DATA]#{data}" 
+      @chatroom = Chatroom.find(data["chatroom_id"])
+      message = @chatroom.messages.create(body: data["body"], user: current_user)
+      Rails.logger.info "[MESSAGE]#{message.body}" 
+      MessageRelayJob.perform_later(message)
+  	end
+
 end

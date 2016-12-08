@@ -3,7 +3,7 @@ class MessageRelayJob < ApplicationJob
 
   	def perform(message)
   		ActionCable.server.broadcast("chatrooms:#{message.chatroom.id}", {
-  			message: MessagesController.render(message),
+  			message: ApplicationController.render(partial: 'messages/message', locals: {message: message}),
   			chatroom_id: message.chatroom.id
   		})
   	end
