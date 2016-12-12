@@ -1,4 +1,15 @@
 $(document).on('turbolinks:load', function(){
+	$(document).on("click", function(){
+		// update - last read timestamp
+		$strike = $(".strike");
+
+		if($strike.length > 0) {
+			chatroom_id = $("[data-behavior='messages']").data("chatroom-id");
+			App.last_read.update(chatroom_id);
+			$strike.remove();
+		}
+	});
+
 	$("#new_message").on('keypress', function(e){
 		if(e.keyCode == 13){ // 13 - Enter
 			e.preventDefault();

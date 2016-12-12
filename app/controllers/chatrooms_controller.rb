@@ -7,10 +7,11 @@ class ChatroomsController < ApplicationController
     @chatrooms = Chatroom.all
   end
 
-  # GET /chatrooms/1
-  # GET /chatrooms/1.json
-  def show
-  end
+    # GET /chatrooms/1
+    # GET /chatrooms/1.json
+    def show
+      @chatroom_user = current_user.chatroom_users.find_by(chatroom_id: @chatroom.id);
+    end
 
   # GET /chatrooms/new
   def new

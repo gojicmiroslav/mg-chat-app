@@ -10,12 +10,27 @@ App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
 	received: function(data){
 		var active_chatrooom = $("div[data-behavior='messages'][data-chatroom-id='" + data.chatroom_id +"']");
 		if(active_chatrooom.length > 0) {
-			//active_chatrooom.append(data.message);
+			if(document.hidden){
+				// 1. Check to see if there is a divider(for unread messages) on the page
+				// 2. If there is no diver, insert one
+				if($(".strike").length == 0){
+					active_chatrooom.append("<div class='strike'><span>Unread messages</span></div>");
+				} else {
+
+				}
+				
+				if(Notification.permission === "granted"){
+					new Notification(data.username, {body: data.body});	
+				}
+
+			} else {				
+				// Send a notice to the server of last read timestamp				
+				App.last_read.update(data.chatroomm_id);
+			}
+
+			// Insert the message
 			active_chatrooom.append("<div><strong>" + data.username +":</strong> " + data.body + " </div>");
 
-			if(document.hidden && Notification.permission === "granted"){
-				new Notification(data.username, {body: data.body});
-			}
 		} else {
 			var $chatroom_link = $("a[data-behavior='chatroom-link'][data-chatroom-id='" + data.chatroom_id + "']");
 			$chatroom_link.css("font-weight", "bold").css('font-style', "italic");
