@@ -1,36 +1,19 @@
 <!DOCTYPE html>
 <html>
-  	<head>
-	    <title>ChatApp</title>
-	    <%= csrf_meta_tags %>
-	    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-	    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  	</head>
+<head>
+    <title>ChatApp</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  	<body>
-  		<%= render 'layouts/header' %>
+<body style="background-color: #c7c7c5">  	
+	<div class="container" style="margin-top: 20px;">
+        <%= render 'layouts/header' %>              
 
-  		<div class="fluid-container" style="margin-top: 70px">
-            <div class="row">
-                <div class="col-sm-2" style="position: fixed; top: 70px; left: 0;">
-                    <% if user_signed_in? %>
-                        <h5>Chatrooms</h5>
-
-                        <ul>
-                            <% current_user.chatrooms.each do |chatroom| %>
-                                <li>
-                                  <%= link_to chatroom.name, chatroom, 
-                                        data: { behavior: 'chatroom-link', chatroom_id: chatroom.id }%>
-                                  </li>
-                            <% end %>
-                        </ul>
-                    <% end %>
-                </div>
-
-                <div class="col-sm-10 col-sm-offset-2">
-                    <%= yield %>
-                </div>                
-            </div>
-    	</div>
-  	</body>
+        <div class="jumbotron">
+            <%= yield %>
+        </div>
+	</div>
+</body>
 </html>

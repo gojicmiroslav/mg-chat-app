@@ -1,5 +1,10 @@
-<h1>New Chatroom</h1>
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+		<h2 class="text-center">New Chatroom</h2>
+		<hr />
 
-<%= render 'form', chatroom: @chatroom %>
+		<%= render 'form', chatroom: @chatroom %>
 
-<%= link_to 'Back', chatrooms_path %>
+		<%= link_to 'Back', chatrooms_path, class: "btn btn-default" %>
+	</div>
+</div>

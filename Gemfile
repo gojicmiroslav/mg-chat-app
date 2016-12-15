@@ -33,8 +33,18 @@ gem 'devise'
 gem 'redis'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  	# Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  	gem 'byebug', platform: :mri
+  	gem 'rspec-rails', '~> 3.5'
+  	gem 'factory_girl'
+  	gem 'factory_girl_rails'
+    gem 'database_cleaner'
+    gem 'shoulda-matchers'
+    gem 'capybara'
+    gem 'faker'
+    gem 'poltergeist'
+    gem 'phantomjs', :require => 'phantomjs/poltergeist'
+    gem 'rails-controller-testing'
 end
 
 group :development do

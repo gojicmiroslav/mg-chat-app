@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	root to: "chatrooms#index"
+	root to: "welcome#index"
 
 	resources :chatrooms do
 		resource :chatroom_users
