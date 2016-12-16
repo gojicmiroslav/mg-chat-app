@@ -2,9 +2,10 @@ require 'rails_helper'
 
 feature 'Home page' do
 	let(:user){ FactoryGirl.create(:user) }
+	let(:other_user){ FactoryGirl.create(:user) }
 	let!(:default){ FactoryGirl.create(:chatroom, user: user)}
 	let!(:programming){ FactoryGirl.create(:programming, user: user)}
-	let!(:testing){ FactoryGirl.create(:testing, user: user)}
+	let!(:testing){ FactoryGirl.create(:testing, user: other_user)}
 
 	scenario 'welcome message' do
 		visit "/"

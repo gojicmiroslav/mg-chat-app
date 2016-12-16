@@ -17,25 +17,14 @@
 
 <% if user_signed_in? %>
 	<div class="row">
-		<div class="col-md-5">        
-	        <h2>Created Chatrooms</h5>
-            <div class="list-group">
-	            <% current_user.chatrooms.each do |chatroom| %>
-				 	<%= link_to chatroom.name, chatroom, class: "list-group-item",
-                            data: { behavior: 'chatroom-link', chatroom_id: chatroom.id }%>
-                <% end %>
-            </div>
-    	</div>
-
-    	<div class="col-md-2"></div>
-
-    	<div class="col-md-5">
+    	<div class="col-md-12">
     		<h2>All Chatrooms</h2>
 
-    		<table class="table table-bordered table-hover table-condensed">
+    		<table class="table table-bordered table-hover table-condensed table-text">
 				<thead>
 					<tr class="warning">
 					  	<th><span class="text-primary"><strong>Name</strong></span></th>
+					  	<th><span class="text-primary"><strong>Is Owner</strong></span></th>
 					  	<th colspan="3"></th>
 					</tr>
 				</thead>
@@ -44,9 +33,21 @@
 				    <% @chatrooms.each do |chatroom| %>
 				      	<tr class="success">
 					        <td><strong><span class="text-warning"><%= chatroom.name %></span></strong></td>
-					        <td><strong><%= link_to 'Show', chatroom %></strong></td>			        
-					        <td><strong><%= link_to 'Join', chatroom_chatroom_users_path(chatroom), method: :post %></strong></td>
-					        <td><strong><%= link_to 'Leave', chatroom_chatroom_users_path(chatroom), method: :delete %></strong></td>
+					        <% if(chatroom.is_owner?(current_user)) %>
+					        	<td><strong><span class="text-warning">Yes</span></strong></td>
+					        <% else %>
+					        	<td><strong><span class="text-warning">No</span></strong></td>
+					        <% end %>
+					        <td><strong><%= link_to 'Show', chatroom, class: "btn btn-primary btn-block" %></strong></td>			        
+					        <% if(chatroom.is_owner?(current_user)) %>
+					        	<td><button class="btn btn-default btn-block" disabled>Joined</button></td>
+					        	<td><strong><%= link_to 'Leave', chatroom_chatroom_users_path(chatroom), method: :delete, class: "btn btn-danger btn-block" %></strong></td>
+					        <% else %>
+					        	<td><strong>
+					        		<%= link_to 'Join', chatroom_chatroom_users_path(chatroom), method: :post, class: "btn btn-success btn-block" %>
+				        		</strong></td>
+				        		<td><strong><button class="btn btn-default btn-block" disabled>Leaved</button></strong></td>
+					        <% end %>
 				      	</tr>
 				    <% end %>
 				</tbody>

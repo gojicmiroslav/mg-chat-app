@@ -6,7 +6,7 @@ class ChatroomsController < ApplicationController
     # GET /chatrooms
     # GET /chatrooms.json
     def index
-        @chatrooms = Chatroom.all
+        @chatrooms = Chatroom.get_chatrooms_for(current_user)
     end
 
     # GET /chatrooms/1
@@ -29,6 +29,7 @@ class ChatroomsController < ApplicationController
     def create
         @chatroom = Chatroom.new(chatroom_params)
         @chatroom.user = current_user
+        @chatroom.users << current_user
 
         respond_to do |format|
             if @chatroom.save

@@ -1,6 +1,18 @@
-<h1>Editing Chatroom</h1>
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+		<%= link_to 'Back', chatrooms_path, class: "btn btn-primary" %>
 
-<%= render 'form', chatroom: @chatroom %>
+		<h2 class="text-center">Edit Chatroom</h2>
+		<hr />
 
-<%= link_to 'Show', @chatroom %> |
-<%= link_to 'Back', chatrooms_path %>
+		<%= render 'form', chatroom: @chatroom, submit_title: "Edit Chatroom" %>
+
+		<div class="row">
+			<div class="col-sm-8 col-md-6">
+				<%= link_to 'Show', @chatroom, class: "btn btn-default" %> 
+			</div>
+		</div>
+	</div>
+</div>
+
+
