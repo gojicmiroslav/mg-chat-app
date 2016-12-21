@@ -52,13 +52,22 @@
 .jumbotron {
     width: 100%;
     margin-top: -50px;
-    background: #72797b;
     box-shadow: 0 1px 5px rgba(0,0,0,.6);
-    color: #ecf7fa;
     padding: 4em 0;
 }
 
 .table-text {
 	font-size:1.8rem;
+}
+
+.sidebar-module {
+    padding: 15px;
+    margin: 0 -15px 15px;
+}
+
+.message {
+	border-radius: 5%;
+	border: 2px solid #2099E8;
+	padding-left: 10px;
 }
 

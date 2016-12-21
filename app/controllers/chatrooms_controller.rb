@@ -13,6 +13,8 @@ class ChatroomsController < ApplicationController
     # GET /chatrooms/1.json
     def show
         @chatroom_user = current_user.chatroom_users.find_by(chatroom_id: @chatroom.id);
+        @user_chatrooms = Chatroom.get_chatrooms_for(current_user)
+        @chatrooms = Chatroom.all
     end
 
     # GET /chatrooms/new

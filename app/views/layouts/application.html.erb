@@ -7,11 +7,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body style="background-color: #cfe0e2">  	
+<body>  	
 	<div class="container" style="margin-top: 20px;">
         <%= render 'layouts/header' %>              
 
-        <div class="jumbotron">
+        <div class="jumbotron">            
             <%= yield %>
         </div>
 	</div>

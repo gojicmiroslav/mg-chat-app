@@ -29,7 +29,35 @@ App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
 			}
 
 			// Insert the message
-			active_chatrooom.append("<div><strong>" + data.username +":</strong> " + data.body + " </div>");
+			//<%= asset_path('user.png')%>
+			// var $css = '<div class="row" style="margin-top: 10px; margin-bottom: 10px;"> \
+			// 				<div class="col-md-10"> \
+			// 					<div class="media bg-warning message"> \
+		 //  							<div class="media-left media-middle"> \
+		 //  								sas \	
+	  // 								</div> \
+		 //  							<div class="media-body"> \
+	  //   								<h5 class="media-heading"><strong><i>' + data.username + '</i></strong></h5> \
+	  //   								<div>' + data.body + '</div> \
+		 //  							</div> \
+			// 					</div> \
+			// 				</div> \
+			// 			</div>';
+
+			var $css =  '<div class="row" style="margin-top: 10px; margin-bottom: 10px;">';
+			$css += '<div class="col-md-10">';
+			$css += '<div class="media bg-warning message">';
+			$css += '<div class="media-left media-middle">';
+			$css += '<div class="media-left media-middle">';
+			$css += '<img src="/assets/user-c1112aab2643a75a567e7b69373fd612d75552b685f90a5d09a5d5804fbefe2f.png" class="media-object" >';
+			$css += '</div>';
+			$css += '<div class="media-body">';
+			$css += '<h5 class="media-heading"><strong><i>' + data.username + '</i></strong></h5>';
+			$css += '<div>' + data.body + '</div>';
+			$css += '</div></div></div></div>';
+
+			//active_chatrooom.append("<div><strong>" + data.username +":</strong> " + data.body + " </div>");
+			active_chatrooom.append($css);
 
 		} else {
 			var $chatroom_link = $("a[data-behavior='chatroom-link'][data-chatroom-id='" + data.chatroom_id + "']");

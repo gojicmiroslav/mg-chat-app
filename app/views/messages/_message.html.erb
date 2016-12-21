@@ -1,1 +1,15 @@
-<div><strong><%= message.user.username %></strong> <%= message.body %></div>
+<div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+	<div class="col-md-10">
+		<div class="media bg-warning message">
+		  	<div class="media-left media-middle">
+		  		<%= image_tag("user.png", class: "media-object") %>
+		  	</div>
+		  	<div class="media-body">
+	    		<h5 class="media-heading"><strong><i><%= message.user.username %></i></strong></h5>
+	    		<div>
+	    		<%= message.body %>
+				</div>    	
+		  	</div>
+		</div>
+	</div>
+</div>

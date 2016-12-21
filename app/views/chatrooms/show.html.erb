@@ -1,24 +1,87 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Back', chatrooms_path, class: "btn btn-primary" %>
-
-<p>
-  <strong>Name:</strong>
-  <%= @chatroom.name %>
-</p>
-
-<% unread_messages = false %>
-<div data-behavior="messages" data-chatroom-id="<%= @chatroom.id %>">
-	<% @chatroom.messages.recent_messages.each do |message| %>
-		<% if !unread_messages && @chatroom_user.last_read_at < message.created_at %>
-			<% unread_messages = true %>
-			<div class="strike"><span>Unread Messages</span></div>
-		<% end %>
-
-		<%= render message %>
-	<% end %>
+<div class="row" style="padding-left: 15px">
+	<%= link_to 'Back', chatrooms_path, class: "btn btn-primary" %>
 </div>
 
-<%= form_for [@chatroom, Message.new] do |f| %>
-	<%= f.text_area :body, rows: 1, class: "form-control", autofocus: true %>
-<% end %>
+<div class="row">
+	<p id="notice"><%= notice %></p>
+</div>
+
+
+<div class="row" style="margin-bottom: 20px">
+	<h2><strong>Current chatroom:</strong> <%= @chatroom.name %></h2>
+</div>
+
+<hr />
+
+<div class="row">
+	<div class="col-sm-4 col-md-3" style="padding-top: 20px">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				Joined Chatrooms
+			</div>
+
+			<div class="panel-body">
+				<% if @user_chatrooms.size > 0 %>
+					<div class="list-group">
+						<% @user_chatrooms.each do |chatroom| %>
+							<% if @chatroom.id == chatroom.id %>
+								<%= link_to chatroom.name, chatroom, class: "list-group-item disabled" %>	
+							<% else %>
+								<%= link_to chatroom.name, chatroom, class: "list-group-item" %>	
+							<% end %>
+						<% end %>
+					</div>
+				<% else %>
+					<h4>No joined chatrooms</h4>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				All Chatrooms
+			</div>
+
+			<div class="panel-body">
+				<% if @chatrooms.size > 0 %>
+					<div class="list-group">
+						<% @chatrooms.each do |chatroom| %>
+							<% if @chatroom.id == chatroom.id %>
+								<%= link_to chatroom.name, chatroom, class: "list-group-item disabled" %>	
+							<% else %>
+								<%= link_to chatroom.name, chatroom, class: "list-group-item" %>	
+							<% end %>
+						<% end %>
+					</div>
+				<% else %>
+					<h4>No joined chatrooms</h4>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-sm-1 col-md-1"></div>
+
+	<div class="col-sm-7 col-md-8">
+		<% unread_messages = false %>
+		<div data-behavior="messages" data-chatroom-id="<%= @chatroom.id %>">
+			<% @chatroom.messages.recent_messages.each do |message| %>
+				<% if !unread_messages && @chatroom_user.show_unread_messages?(message) %>
+					<% unread_messages = true %>
+					<div class="strike"><span>Unread Messages</span></div>
+				<% end %>
+
+				<%= render message %>
+			<% end %>
+		</div>
+
+		<div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+			<div class="col-md-10">
+				<%= form_for [@chatroom, Message.new] do |f| %>
+					<%= f.text_area :body, rows: 1, class: "form-control", autofocus: true %>
+				<% end %>	
+			</div>
+		</div>
+	</div>
+</div>
