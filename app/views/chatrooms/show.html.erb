@@ -36,28 +36,6 @@
 				<% end %>
 			</div>
 		</div>
-
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				All Chatrooms
-			</div>
-
-			<div class="panel-body">
-				<% if @chatrooms.size > 0 %>
-					<div class="list-group">
-						<% @chatrooms.each do |chatroom| %>
-							<% if @chatroom.id == chatroom.id %>
-								<%= link_to chatroom.name, chatroom, class: "list-group-item disabled" %>	
-							<% else %>
-								<%= link_to chatroom.name, chatroom, class: "list-group-item" %>	
-							<% end %>
-						<% end %>
-					</div>
-				<% else %>
-					<h4>No joined chatrooms</h4>
-				<% end %>
-			</div>
-		</div>
 	</div>
 
 
